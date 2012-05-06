@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [ $# != 1 ]; then
+	echo "Usage: ramdisk <size in Mb>"
+	exit 0
+fi
+
+sectors=$1
+sectors=$((sectors*2048))
+echo "Creating HFS+ ramdisk of size $1Mb"
+
+diskutil erasevolume HFS+ "ramdisk" `hdiutil attach -nomount ram://$sectors`
